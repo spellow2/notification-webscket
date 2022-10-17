@@ -94,45 +94,46 @@ services:
 ```
 
 - deploy setting<br>
-  properies file : ./conf/notification-email.properties
+  properies file : ./conf/notification.properties
 ```ini
+#dev에 셋팅된 값을 참조하여 셋팅한다.
 #database
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.name=datasource
-spring.datasource.url=jdbc:mysql://<aws database host:port>/<aws database>?autoReconnect=true
-spring.datasource.username=<aws database id>
-spring.datasource.password=<aws database password>
+#MySQL 5.7.12
+spring.datasource.url=jdbc:mysql://localhost:3306/TestNotification?autoReconnect=true
+spring.datasource.username=root
+spring.datasource.password=9114aa!!
 
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.generate-ddl=true
+spring.jpa.show-sql=true
 
-#Email
-emailHost=<email smtp server host>
-emailHostPort=<smtp server port>
-emailHostAccountId=<smtp server id>
-emailHostAccountName=MosaicSquare
-emailHostAccountPassword=<smtp server password>
-emailHostUseSSL=true
+##WebSocket Server Setting ( defualt 0.0.0.0:19092 16 16 1024 )
+webSocketServerHost=0.0.0.0
+webSocketServerPort=19092
+webSocketBossThread=32
+webSocketWorkerThread=32
+webSocketBackLog=128
 
-#kafka
 #Kafka consumer setting
-kafkaConsumerUse=true
-kafkaConsumerBrokerCount=<broker count>
-kafkaConsumerHosts=<kafka host -splite,->
-## ex> 192.168.0.58:9092,192.168.0.58:9093,192.168.0.58:9094
-kafkaConsumerTopicName=<topic name>
-kafkaConsumerGroupDifferentEachProcess=<different groupid each consumer>
-## true  : each all consumer recv same new topic
-## false : only one consumer recv same new topic
-kafkaConsumerGroupId=<groupid>
-kafkaConsumerPollingInterval=<consumer polling interval>
+kafkaConsumerUse=false
+kafkaConsumerBrokerCount=3
+kafkaConsumerHosts=192.168.0.58:9092,192.168.0.58:9093,192.168.0.58:9094
+kafkaConsumerTopicName=notifyMSG
+kafkaConsumerGroupDifferentEachProcess=true
+kafkaConsumerGroupId=websocket
+kafkaConsumerPollingInterval=1000
 
 #Kakfa producer setting
 kafkaProducerUse=false
-kafkaProducerBrokerCount=<broker count>
-kafkaProducerHosts=<kafka host -splite,->
-## ex> 192.168.0.58:9092,192.168.0.58:9093,192.168.0.58:9094
-kafkaProducerTopicName=<topic name>
+kafkaProducerBrokerCount=3
+kafkaProducerHosts=192.168.0.58:9092,192.168.0.58:9093,192.168.0.58:9094
+kafkaProducerTopicName=notifyMSG
+
+#Test
+webSocketTest=true
+webSocketTestInterval=5000
 ```
 
