@@ -20,9 +20,6 @@ public class NotificationService {
         Map<Long, String> mapNotificationMemberInfo = new HashMap<>();
 
         //ToDo 메시지를 받아야 하는 유저를 DB에서 검색한다.
-        //mapNotificationMemberInfo.put(10000L,"spellow2@naver.com");
-        //mapNotificationMemberInfo.put(10001L,"white@bithumblive.com");
-        //mapNotificationMemberInfo.put(10002L,"spellow2@gmail.com");
 
         return mapNotificationMemberInfo;
     }
